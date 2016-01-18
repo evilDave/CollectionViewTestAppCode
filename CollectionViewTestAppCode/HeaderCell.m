@@ -4,6 +4,7 @@
 //
 
 #import "HeaderCell.h"
+#import "CGRectHelper.h"
 
 @implementation HeaderCell {
 	UILabel *label;
@@ -15,9 +16,10 @@
 	if (self) {
 		UIFont *font = [UIFont systemFontOfSize:22];
 
-		label = [[UILabel alloc] init];
+		label = [[UILabel alloc] initWithFrame:[CGRectHelper frameAtOrigin:frame]];
 		
 		[label setFont:font];
+		[label setTextAlignment:NSTextAlignmentCenter];
 
 		[self.contentView addSubview:label];
 	}
@@ -27,7 +29,6 @@
 
 - (void)setText:(NSString *)text {
 	[label setText:text];
-	[label sizeToFit];
 }
 
 @end

@@ -30,6 +30,13 @@
 // TODO: implement no grid border between items (border is in cell rather than in the container)
 // TODO: implement drag selection (move to next item when dragging touch down)
 
+// TODO: make into control
+
+// TODO: show start and end dates in buttons
+// TODO: show start and end dates at top (in none edit mode)
+// TODO: controller to manage state changes, editing mode changes etc
+// TODO: delegate protocol
+
 - (instancetype)init {
 	self = [super init];
 	if (self) {

@@ -4,6 +4,7 @@
 //
 
 #import "DayCell.h"
+#import "CGRectHelper.h"
 
 @implementation DayCell {
 	UILabel *label;
@@ -13,15 +14,17 @@
 	self = [super initWithFrame:frame];
 	
 	if (self) {
-		UIFont *font = [UIFont systemFontOfSize:22];
-		label = [[UILabel alloc] init];
-		[label setFont:font];
-
-		[self.contentView addSubview:label];
-
 		self.backgroundView = [[UIView alloc] initWithFrame:frame];
 		self.selectedBackgroundView = [[UIView alloc] initWithFrame:frame];
 
+		UIFont *font = [UIFont systemFontOfSize:22];
+
+		label = [[UILabel alloc] initWithFrame:[CGRectHelper frameAtOrigin:frame]];
+
+		[label setFont:font];
+		[label setTextAlignment:NSTextAlignmentCenter];
+
+		[self.contentView addSubview:label];
 	}
 
 	return self;
@@ -29,7 +32,6 @@
 
 - (void)setText:(NSString *)text {
 	[label setText:text];
-	[label sizeToFit];
 }
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor {
