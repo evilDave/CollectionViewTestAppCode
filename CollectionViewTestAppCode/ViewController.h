@@ -9,4 +9,9 @@
 
 @interface ViewController : UIViewController
 
+@property(nonatomic) NSDate *startDate;
+@property(nonatomic) NSDate *endDate;
+
+@property(nonatomic) BOOL startMode;
+
 @end

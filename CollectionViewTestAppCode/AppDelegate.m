@@ -9,6 +9,7 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
+#import "NSDate+Helper.h"
 
 
 @interface AppDelegate ()
@@ -27,6 +28,14 @@
     ViewController *viewController = [[ViewController alloc] init];
     [self.window setRootViewController:viewController];
     [self.window makeKeyAndVisible];
+
+    /*
+    NSDate *today = [[NSDate new] truncateTo:NSCalendarUnitDay];
+    NSDate *another = [today addUnit:NSCalendarUnitDay value:10];
+    [viewController setStartDate:today];
+    [viewController setEndDate:another];
+     */
+
     return YES;
 }
 

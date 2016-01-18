@@ -7,4 +7,6 @@
 
 @interface UIColor (Helper)
 - (UIColor *)darker;
+
+- (UIColor *)darker:(int)factor;
 @end
