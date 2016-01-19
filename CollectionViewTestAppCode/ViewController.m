@@ -225,23 +225,23 @@
 		duration = [self.endDate timeIntervalSinceDate:self.startDate];
 	}
 	if([self startMode]) {
-		[self setStartDate:cellDate];
-		if(![[self endDate] onOrAfter:cellDate]) {
-			[self setEndDate:[self.startDate dateByAddingTimeInterval:duration]];
+		if(cellDate < [self startDate] || cellDate >= [self endDate]) {
+			[self setEndDate:[cellDate dateByAddingTimeInterval:duration]];
 			if(self.endDate > maxDate) {
 				[self setEndDate:maxDate];
 			}
 		}
+		[self setStartDate:cellDate];
 		[self enterEndMode];
 	}
 	else {
-		[self setEndDate:cellDate];
-		if (![[self startDate] onOrBefore:cellDate]) {
-			[self setStartDate:[self.endDate dateByAddingTimeInterval:-duration]];
+		if(cellDate <= [self startDate]) {
+			[self setStartDate:[cellDate dateByAddingTimeInterval:-duration]];
 			if(self.startDate < minDate) {
 				[self setStartDate:minDate];
 			}
 		}
+		[self setEndDate:cellDate];
 	}
 	[collectionView reloadData];
 }
