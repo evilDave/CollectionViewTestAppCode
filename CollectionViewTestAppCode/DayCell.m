@@ -48,4 +48,8 @@
 	return self;
 }
 
+- (void)setTextColor:(UIColor *)color {
+	[label setTextColor:color];
+}
+
 @end

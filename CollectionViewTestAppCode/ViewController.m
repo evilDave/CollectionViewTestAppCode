@@ -136,6 +136,7 @@
 	return headerCell;
 }
 
+// TODO: too big
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 	DayCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"day" forIndexPath:indexPath];
 
@@ -149,6 +150,8 @@
 	NSString *text = [NSString stringWithFormat:@"%i", indexPath.row - daysBefore + 1];
 
 	NSDate *cellDate = [sectionStartDate addUnit:NSCalendarUnitDay value:indexPath.row - daysBefore];
+
+	// current selection
 	if([self.startDate onOrBefore:cellDate] && [self.endDate onOrAfter:cellDate]){
 		if([self.startDate isEqualToDate:cellDate]) {
 			[cell setBackgroundColor:[UIColor greenColor]];
@@ -161,6 +164,9 @@
 		}
 	}
 	else {
+		if(cellDate < minDate || cellDate > maxDate) {
+			[cell setTextColor:[[UIColor lightGrayColor] darker:3]];
+		}
 		[cell setBackgroundColor:[[UIColor lightGrayColor] darker]];
 	}
 	[cell setSelectedBackgroundColor:[UIColor yellowColor]];
@@ -194,22 +200,37 @@
 	return CGSizeMake(collectionView.bounds.size.width, 60);
 }
 
+// TODO: this is getting a bit big
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 	// should store this for speed
 	NSDate *sectionStartDate = [self getStartDateFor:indexPath.section];
 	int daysBefore = [self daysInWeekBeforeStartForSection:indexPath.section];
 	NSDate *cellDate = [sectionStartDate addUnit:NSCalendarUnitDay value:indexPath.row - daysBefore];
+	if(cellDate < minDate || cellDate > maxDate) {
+		[collectionView deselectItemAtIndexPath:indexPath animated:NO];
+		return;
+	}
+	NSTimeInterval duration = 0;
+	if(self.startDate && self.endDate) {
+		duration = [self.endDate timeIntervalSinceDate:self.startDate];
+	}
 	if([self startMode]) {
 		[self setStartDate:cellDate];
 		if(![[self endDate] onOrAfter:cellDate]) {
-			[self setEndDate:cellDate];
+			[self setEndDate:[self.startDate dateByAddingTimeInterval:duration]];
+			if(self.endDate > maxDate) {
+				[self setEndDate:maxDate];
+			}
 		}
 		[self enterEndMode];
 	}
 	else {
 		[self setEndDate:cellDate];
 		if (![[self startDate] onOrBefore:cellDate]) {
-			[self setStartDate:cellDate];
+			[self setStartDate:[self.endDate dateByAddingTimeInterval:-duration]];
+			if(self.startDate < minDate) {
+				[self setStartDate:minDate];
+			}
 		}
 	}
 	[collectionView reloadData];

@@ -15,4 +15,6 @@
 @property(nonatomic, strong) UIColor *selectedBackgroundColor;
 
 - (UICollectionViewCell *)reset;
+
+- (void)setTextColor:(UIColor *)color;
 @end
