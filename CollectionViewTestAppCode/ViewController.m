@@ -164,10 +164,13 @@
 		}
 	}
 	else {
-		if(cellDate < minDate || cellDate > maxDate) {
-			[cell setTextColor:[[UIColor lightGrayColor] darker:3]];
-		}
 		[cell setBackgroundColor:[[UIColor lightGrayColor] darker]];
+	}
+	if(cellDate < minDate || cellDate > maxDate) {
+		[cell setTextColor:[[UIColor lightGrayColor] darker:3]];
+	}
+	else{
+		[cell setTextColor:[UIColor blackColor]];
 	}
 	[cell setSelectedBackgroundColor:[UIColor yellowColor]];
 	[cell setText:text];
