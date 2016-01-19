@@ -5,10 +5,13 @@
 
 #import "NSDate+Helper.h"
 #import "NSDateComponents+Helper.h"
+#import "OptionsHelper.h"
 
 @implementation NSDate (Helper)
 
 static NSCalendar *calendar; // TODO: make this a calendar model helper, pass it the calendar and use it when needed (it can still have the NSDate category)
+
+// TODO: hmm: could make this a singleton, have the calendar as a property, let it be mutable, then still have all the categories on it
 
 + (void)initialize {
 	calendar = [NSCalendar currentCalendar]; // TODO: maybe pass in and share this?
@@ -16,10 +19,16 @@ static NSCalendar *calendar; // TODO: make this a calendar model helper, pass it
 }
 
 - (NSDate *)truncateTo:(enum NSCalendarUnit)unit {
-	// would need to check if only one bit is set
-	unit = (unit - 2) | unit;
+	unit = [self unitsFromYearTo:unit];
 	NSDateComponents *components = [calendar components:unit fromDate:self];
 	return [calendar dateFromComponents:components];
+}
+
+- (enum NSCalendarUnit)unitsFromYearTo:(enum NSCalendarUnit)unit {
+	if([OptionsHelper isSingleOption:unit]) {
+		unit = (unit - 2) | unit;
+	}
+	return unit;
 }
 
 + (int)daysInWeek {

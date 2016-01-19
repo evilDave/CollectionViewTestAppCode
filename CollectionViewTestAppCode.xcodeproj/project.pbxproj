@@ -25,6 +25,7 @@
 		7997ABA38D1B38E7CC855440 /* DayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997A0974168956893D395CB /* DayCell.m */; };
 		7997ABFA59B018F75C10FBEE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997A41CE113F49D4316D46E /* ViewController.m */; };
 		7997ACB17BB5A7EA26D0731E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7997ABCA708B756DE26B24B4 /* Info.plist */; };
+		7997ACF3B4EAAD1ECD94E501 /* OptionsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997A97E37DF8BEE97E133BD /* OptionsHelper.m */; };
 		7997AFD34AC51985E86FB13C /* CollectionViewTestAppCodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997A905988BC14DCD82ABDA /* CollectionViewTestAppCodeTests.m */; };
 /* End PBXBuildFile section */
 
@@ -63,10 +64,12 @@
 		7997A6F6F63FF47BE684540B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7997A760457C63996C099524 /* CGRectHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGRectHelper.m; sourceTree = "<group>"; };
 		7997A780090855EC9EFEBC88 /* NSDate+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helper.m"; sourceTree = "<group>"; };
+		7997A7B94A71BA624277CDB2 /* OptionsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsHelper.h; sourceTree = "<group>"; };
 		7997A7C64542762FB2C016F9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7997A7D771666A69BE35E57F /* CollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		7997A85DFE6C70D421F825D2 /* HeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderCell.h; sourceTree = "<group>"; };
 		7997A905988BC14DCD82ABDA /* CollectionViewTestAppCodeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionViewTestAppCodeTests.m; sourceTree = "<group>"; };
+		7997A97E37DF8BEE97E133BD /* OptionsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsHelper.m; sourceTree = "<group>"; };
 		7997AB55B0A04611EB28A512 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7997AB667CCD83F83346C1C4 /* UIColor+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Helper.h"; sourceTree = "<group>"; };
 		7997AB6E060108331745E8CF /* NSDateComponents+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateComponents+Helper.m"; sourceTree = "<group>"; };
@@ -145,6 +148,8 @@
 				7997AF4272D8ACF038AE80B8 /* UICollectionView+Helper.h */,
 				7997A760457C63996C099524 /* CGRectHelper.m */,
 				7997ACE36EB8A2AB07DF4918 /* CGRectHelper.h */,
+				7997A97E37DF8BEE97E133BD /* OptionsHelper.m */,
+				7997A7B94A71BA624277CDB2 /* OptionsHelper.h */,
 			);
 			path = CollectionViewTestAppCode;
 			sourceTree = "<group>";
@@ -330,6 +335,7 @@
 				7997AA8AE539740500401216 /* CollectionViewFlowLayout.m in Sources */,
 				7997A5C95980F56562C78D5F /* UICollectionView+Helper.m in Sources */,
 				7997A14E3251487FD384D744 /* CGRectHelper.m in Sources */,
+				7997ACF3B4EAAD1ECD94E501 /* OptionsHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -33,7 +33,6 @@ static NSCalendar *calendar;
 		case NSCalendarUnitNanosecond:break;
 		case NSCalendarUnitCalendar:break;
 		case NSCalendarUnitTimeZone:break;
-		case NSWeekCalendarUnit:break;
 	}
 	return 0;
 }

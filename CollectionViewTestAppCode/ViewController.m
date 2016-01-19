@@ -29,6 +29,8 @@
 // TODO: use number of days in week to specify number of columns (does this work for all calendars?)
 // TODO: pass in calendar, test some
 
+// TODO: move currently selected range when new start < start or new end > end
+
 // TODO: implement drag selection (move to next item when dragging touch down)
 
 // TODO: make into control
