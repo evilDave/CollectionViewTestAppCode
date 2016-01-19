@@ -20,25 +20,24 @@
 	NSDate *maxDate; // latest selectable date
 	NSDate *firstDate; // first date shown
 	NSDate *lastDate; // last date shown
-	UIButton *startButton; // start date selected by user
-	UIButton *endButton; // end date selected by user
+	UIButton *startButton;
+	UIButton *endButton;
 	NSCache *daysInWeekBeforeStartForSectionCache;
 	NSCache *startDateForSectionCache;
+	UILabel *startButtonText;
+	UILabel *endButtonText;
 }
 
-// TODO: use number of days in week to specify number of columns (does this work for all calendars?)
 // TODO: pass in calendar, test some
-
-// TODO: move currently selected range when new start < start or new end > end
 
 // TODO: implement drag selection (move to next item when dragging touch down)
 
 // TODO: make into control
 
-// TODO: show start and end dates in buttons
 // TODO: show start and end dates at top (in none edit mode)
 // TODO: controller to manage state changes, editing mode changes etc
 // TODO: delegate protocol
+// TODO: minimum selection duration (e.g. 1 day), maximum? what to do at the end of the ranges
 
 - (instancetype)init {
 	self = [super init];
@@ -67,22 +66,30 @@
 
 	CGFloat buttonWidth = (frame.size.width-20)/2;
 	startButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 50, buttonWidth, 50)];
-	[startButton setTitle:@"Start" forState:UIControlStateNormal];
+	[startButton setTitle:@"From" forState:UIControlStateNormal];
+	[startButton setTitleEdgeInsets:UIEdgeInsetsMake(-20, 0, 0, 0)];
 	[startButton addTarget:self action:@selector(enterStartMode) forControlEvents:UIControlEventTouchUpInside];
 	[startButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 	[startButton setTitleColor:[UIColor greenColor] forState:UIControlStateSelected];
 	[startButton setBackgroundImage:[UIImage imageWithColor:[[UIColor lightGrayColor] darker:3]] forState:UIControlStateSelected];
 	[startButton setBackgroundImage:[UIImage imageWithColor:[UIColor lightGrayColor]] forState:UIControlStateNormal];
 	[self.view addSubview:startButton];
+	startButtonText = [[UILabel alloc] initWithFrame:CGRectMake(0, 28, buttonWidth, 20)];
+	[startButtonText setTextAlignment:NSTextAlignmentCenter];
+	[startButton addSubview:startButtonText];
 
 	endButton = [[UIButton alloc] initWithFrame:CGRectMake(10+buttonWidth, 50, buttonWidth, 50)];
-	[endButton setTitle:@"End" forState:UIControlStateNormal];
+	[endButton setTitle:@"To" forState:UIControlStateNormal];
+	[endButton setTitleEdgeInsets:UIEdgeInsetsMake(-20, 0, 0, 0)];
 	[endButton addTarget:self action:@selector(enterEndMode) forControlEvents:UIControlEventTouchUpInside];
 	[endButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 	[endButton setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
 	[endButton setBackgroundImage:[UIImage imageWithColor:[[UIColor lightGrayColor] darker:3]] forState:UIControlStateSelected];
 	[endButton setBackgroundImage:[UIImage imageWithColor:[UIColor lightGrayColor]] forState:UIControlStateNormal];
 	[self.view addSubview:endButton];
+	endButtonText = [[UILabel alloc] initWithFrame:CGRectMake(0, 28, buttonWidth, 20)];
+	[endButtonText setTextAlignment:NSTextAlignmentCenter];
+	[endButton addSubview:endButtonText];
 
 	UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(10, 50+50, frame.size.width-20, frame.size.height-60-50) collectionViewLayout:[[CollectionViewFlowLayout alloc] init]];
 	[collectionView setDelegate:self];
@@ -255,6 +262,20 @@
 		[daysInWeekBeforeStartForSectionCache setObject:days forKey:@(section)];
 	}
 	return [days intValue];
+}
+
+- (void)setStartDate:(NSDate *)startDate {
+	_startDate = startDate;
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setDateFormat:@"dd MMM yyyy"];
+	[startButtonText setText:[formatter stringFromDate:startDate]];
+}
+
+- (void)setEndDate:(NSDate *)endDate {
+	_endDate = endDate;
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setDateFormat:@"dd MMM yyyy"];
+	[endButtonText setText:[formatter stringFromDate:endDate]];
 }
 
 @end
