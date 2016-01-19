@@ -26,8 +26,9 @@
 	NSCache *startDateForSectionCache;
 }
 
-// TODO: implement exact item cell spacing layout
-// TODO: implement no grid border between items (border is in cell rather than in the container)
+// TODO: use number of days in week to specify number of columns (does this work for all calendars?)
+// TODO: pass in calendar, test some
+
 // TODO: implement drag selection (move to next item when dragging touch down)
 
 // TODO: make into control
@@ -50,7 +51,7 @@
 - (void)loadView {
 	CGRect bounds = [[UIScreen mainScreen] bounds];
 	self.view = [[UIView alloc] initWithFrame:bounds];
-	self.view.backgroundColor = [UIColor lightGrayColor];
+	self.view.backgroundColor = [UIColor whiteColor];
 
 	[self setupCalendar];
 
@@ -86,6 +87,7 @@
 	[collectionView setDataSource:self];
 	[collectionView registerClass:[DayCell class] forCellWithReuseIdentifier:@"day"]; // possibly need different day cell types
 	[collectionView registerClass:[HeaderCell class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
+	[collectionView setBackgroundColor:[[UIColor lightGrayColor] darker]];
 	[self.view addSubview:collectionView];
 }
 
@@ -124,10 +126,7 @@
     HeaderCell *headerCell = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"header" forIndexPath:indexPath];
 
 	NSDate *sectionDate = [self getStartDateFor:indexPath.section];
-	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	[formatter setDateFormat:@"MMMM"];
-
-	NSString *text = [formatter stringFromDate:sectionDate];
+	NSString *text = [sectionDate symbolForMonth];
 
     [headerCell setBackgroundColor:[[UIColor lightGrayColor] darker:3]];
     [headerCell setText:text];
@@ -169,24 +168,28 @@
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-	return UIEdgeInsetsMake(2, 2, 2, 2);
+	CGFloat cellDimension = (CGFloat) floor((collectionView.bounds.size.width) / [NSDate daysInWeek]);
+	CGFloat width = cellDimension * [NSDate daysInWeek];
+	CGFloat diff = collectionView.bounds.size.width - width;
+	CGFloat half = diff / 2;
+	return UIEdgeInsetsMake(half, half, half, half);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-	return 2;
+	return 0;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-	return 2;
+	return 0;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-	CGFloat cellDimension = (collectionView.bounds.size.width - 18) / 7;
+	CGFloat cellDimension = floor((collectionView.bounds.size.width) / [NSDate daysInWeek]);
 	return CGSizeMake(cellDimension, cellDimension);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-	return CGSizeMake(collectionView.bounds.size.width, 50);
+	return CGSizeMake(collectionView.bounds.size.width, 60);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
