@@ -42,6 +42,7 @@
 	[self.selectedBackgroundView setBackgroundColor:backgroundColor];
 }
 
+// TODO: use prepareForReuse
 - (UICollectionViewCell *)reset {
 	[self setBackgroundColor:nil];
 	[label setText:nil];
