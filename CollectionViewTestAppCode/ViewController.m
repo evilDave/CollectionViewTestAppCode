@@ -1,6 +1,6 @@
 //
 // Created by David Clark on 14/01/2016.
-// Copyright (c) 2016 ___FULLUSERNAME___. All rights reserved.
+// Copyright (c) 2016 David Clark. All rights reserved.
 //
 
 #import "ViewController.h"
@@ -10,7 +10,12 @@
 #import "NSDate+Helper.h"
 #import "UIImage+Helper.h"
 #import "CollectionViewFlowLayout.h"
+#import "ViewController+MASAdditions.h"
+#import "RoundedButton.h"
+#import <Masonry/View+MASAdditions.h>
 
+
+const CGFloat controlHeight = 50;
 
 @interface ViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @end
@@ -20,12 +25,12 @@
 	NSDate *maxDate; // latest selectable date
 	NSDate *firstDate; // first date shown
 	NSDate *lastDate; // last date shown
-	UIButton *startButton;
-	UIButton *endButton;
+	UIButton *_startButton;
+	UIButton *_endButton;
 	NSCache *daysInWeekBeforeStartForSectionCache;
 	NSCache *startDateForSectionCache;
-	UILabel *startButtonText;
-	UILabel *endButtonText;
+	UILabel *_startButtonText;
+	UILabel *_endButtonText;
 }
 
 // TODO: pass in calendar, test some
@@ -50,65 +55,91 @@
 }
 
 - (void)loadView {
-	CGRect bounds = [[UIScreen mainScreen] bounds];
-	self.view = [[UIView alloc] initWithFrame:bounds];
+	self.view = [[UIView alloc] init];
 	self.view.backgroundColor = [UIColor whiteColor];
 
 	[self setupCalendar];
 
-	[self setupSubviewsWithFrame:bounds];
+	UIEdgeInsets buttonTitleEdgeInsets = UIEdgeInsetsMake(-20, 0, 0, 0);
+	UIEdgeInsets buttonTextEdgeInsets = UIEdgeInsetsMake(0, 0, 5, 0);
 
-	[self enterStartMode]; // remember to just use the outer function, don't change the states or properties - this indicates that they should be hidden in a different class
-}
+	_startButton = [[RoundedButton alloc] init];
+	[_startButton setTitle:@"From" forState:UIControlStateNormal];
+	[_startButton setTitleEdgeInsets:buttonTitleEdgeInsets];
+	[_startButton addTarget:self action:@selector(enterStartMode) forControlEvents:UIControlEventTouchUpInside];
+	[_startButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+	[_startButton setTitleColor:[UIColor greenColor] forState:UIControlStateSelected];
+    [_startButton setBackgroundImage:[UIImage imageWithColor:[UIColor HCBlueColor]] forState:UIControlStateSelected];
+	[_startButton setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+    [_startButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+	[self.view addSubview:_startButton];
+	[_startButton mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.top.leading.equalTo(self.view);
+		make.width.equalTo(self.view).multipliedBy(0.5);
+		make.height.mas_equalTo(controlHeight);
+	}];
 
-- (void)setupSubviewsWithFrame:(CGRect)frame {
-	// TODO: view sizing code is wrong/demo only
+	_startButtonText = [[UILabel alloc] init];
+	[_startButtonText setTextAlignment:NSTextAlignmentCenter];
+	[_startButtonText setText:@"testing"];
+	[_startButtonText setTranslatesAutoresizingMaskIntoConstraints:NO];
+	[_startButton addSubview:_startButtonText];
+	[_startButtonText mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.leading.trailing.bottom.equalTo(_startButton).insets(buttonTextEdgeInsets);
+	}];
 
-	CGFloat buttonWidth = (frame.size.width-20)/2;
-	startButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 50, buttonWidth, 50)];
-	[startButton setTitle:@"From" forState:UIControlStateNormal];
-	[startButton setTitleEdgeInsets:UIEdgeInsetsMake(-20, 0, 0, 0)];
-	[startButton addTarget:self action:@selector(enterStartMode) forControlEvents:UIControlEventTouchUpInside];
-	[startButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-	[startButton setTitleColor:[UIColor greenColor] forState:UIControlStateSelected];
-	[startButton setBackgroundImage:[UIImage imageWithColor:[[UIColor lightGrayColor] darker:3]] forState:UIControlStateSelected];
-	[startButton setBackgroundImage:[UIImage imageWithColor:[UIColor lightGrayColor]] forState:UIControlStateNormal];
-	[self.view addSubview:startButton];
-	startButtonText = [[UILabel alloc] initWithFrame:CGRectMake(0, 28, buttonWidth, 20)];
-	[startButtonText setTextAlignment:NSTextAlignmentCenter];
-	[startButton addSubview:startButtonText];
+	_endButton = [[UIButton alloc] init];
+	[_endButton setTitle:@"To" forState:UIControlStateNormal];
+	[_endButton setTitleEdgeInsets:buttonTitleEdgeInsets];
+	[_endButton addTarget:self action:@selector(enterEndMode) forControlEvents:UIControlEventTouchUpInside];
+	[_endButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+	[_endButton setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+    [_endButton setBackgroundImage:[UIImage imageWithColor:[UIColor HCBlueColor]] forState:UIControlStateSelected];
+    [_endButton setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+	[_endButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+	[self.view addSubview:_endButton];
+	[_endButton mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.top.trailing.equalTo(self.view);
+		make.width.equalTo(self.view).multipliedBy(0.5);
+		make.height.mas_equalTo(controlHeight);
+	}];
 
-	endButton = [[UIButton alloc] initWithFrame:CGRectMake(10+buttonWidth, 50, buttonWidth, 50)];
-	[endButton setTitle:@"To" forState:UIControlStateNormal];
-	[endButton setTitleEdgeInsets:UIEdgeInsetsMake(-20, 0, 0, 0)];
-	[endButton addTarget:self action:@selector(enterEndMode) forControlEvents:UIControlEventTouchUpInside];
-	[endButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-	[endButton setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
-	[endButton setBackgroundImage:[UIImage imageWithColor:[[UIColor lightGrayColor] darker:3]] forState:UIControlStateSelected];
-	[endButton setBackgroundImage:[UIImage imageWithColor:[UIColor lightGrayColor]] forState:UIControlStateNormal];
-	[self.view addSubview:endButton];
-	endButtonText = [[UILabel alloc] initWithFrame:CGRectMake(0, 28, buttonWidth, 20)];
-	[endButtonText setTextAlignment:NSTextAlignmentCenter];
-	[endButton addSubview:endButtonText];
+	_endButtonText = [[UILabel alloc] init];
+	[_endButtonText setTextAlignment:NSTextAlignmentCenter];
+	[_endButtonText setText:@"testing"];
+	[_endButtonText setTranslatesAutoresizingMaskIntoConstraints:NO];
+	[_endButton addSubview:_endButtonText];
+	[_endButtonText mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.leading.trailing.bottom.equalTo(_endButton).insets(buttonTextEdgeInsets);
+	}];
 
-	UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(10, 50+50, frame.size.width-20, frame.size.height-60-50) collectionViewLayout:[[CollectionViewFlowLayout alloc] init]];
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0,0,0,0) collectionViewLayout:[[CollectionViewFlowLayout alloc] init]];
 	[collectionView setDelegate:self];
 	[collectionView setDataSource:self];
-	[collectionView registerClass:[DayCell class] forCellWithReuseIdentifier:@"day"]; // possibly need different day cell types
+	[collectionView registerClass:[DayCell class] forCellWithReuseIdentifier:@"day"]; // possibly need multiple different day cell types
 	[collectionView registerClass:[HeaderCell class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
-	[collectionView setBackgroundColor:[[UIColor lightGrayColor] darker]];
-	[self.view addSubview:collectionView];
+	[collectionView setBackgroundColor:[UIColor whiteColor]];
+    [collectionView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.view addSubview:collectionView];
+    [collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_startButton.mas_bottom);
+        make.bottom.equalTo(self.mas_bottomLayoutGuide);
+        make.leading.trailing.equalTo(self.view);
+    }];
+
+
+    [self enterStartMode]; // remember to just use the outer function, don't change the states or properties - this indicates that they should be hidden in a different class
 }
 
 - (void)enterEndMode {
-	[endButton setSelected:YES]; // this is a bit low level for here
-	[startButton setSelected:NO];
+	[_endButton setSelected:YES]; // this is a bit low level for here
+	[_startButton setSelected:NO];
 	[self setStartMode:NO];
 }
 
 - (void)enterStartMode {
-	[startButton setSelected:YES];
-	[endButton setSelected:NO];
+	[_startButton setSelected:YES];
+	[_endButton setSelected:NO];
 	[self setStartMode:YES];
 }
 
@@ -268,14 +299,14 @@
 	_startDate = startDate;
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateFormat:@"dd MMM yyyy"];
-	[startButtonText setText:[formatter stringFromDate:startDate]];
+	[_startButtonText setText:[formatter stringFromDate:startDate]];
 }
 
 - (void)setEndDate:(NSDate *)endDate {
 	_endDate = endDate;
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateFormat:@"dd MMM yyyy"];
-	[endButtonText setText:[formatter stringFromDate:endDate]];
+	[_endButtonText setText:[formatter stringFromDate:endDate]];
 }
 
 @end

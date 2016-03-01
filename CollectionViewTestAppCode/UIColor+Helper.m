@@ -1,6 +1,6 @@
 //
 // Created by David Clark on 14/01/2016.
-// Copyright (c) 2016 ___FULLUSERNAME___. All rights reserved.
+// Copyright (c) 2016 David Clark. All rights reserved.
 //
 
 #import "UIKit/UIColor.h"
@@ -11,6 +11,10 @@
 
 - (UIColor *)darker {
 	return [self darker:1];
+}
+
++ (UIColor *)HCBlueColor {
+	return [UIColor colorWithRed:33.0f/255 green:177.0f/255 blue:236.0f/255 alpha:1.0f];
 }
 
 - (UIColor *)darker:(int)factor {
