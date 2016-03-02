@@ -12,12 +12,14 @@
 		7997A1C6E4B21EC4923696D4 /* UIImage+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997AEDE184FA568D3DBEDB6 /* UIImage+Helper.m */; };
 		7997A1F8292D37812C07E902 /* UIColor+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997A5B0FD1EE17736527D83 /* UIColor+Helper.m */; };
 		7997A2D1053EDF6FA28D0094 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7997A06FBE5714E496A70A92 /* Info.plist */; };
+		7997A2FC5C0D7770674DF4FD /* DayCellSelectionStateBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997AF73AA4048EF0219ED8D /* DayCellSelectionStateBackgroundView.m */; };
 		7997A3797556CF6AC8F3F273 /* ArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997A499738848648A40056A /* ArrowView.m */; };
 		7997A42BCF0DB81B3B2077C0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997A7C64542762FB2C016F9 /* main.m */; };
 		7997A4492340931E0E635B0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7997AD07381C4DD302DC836C /* LaunchScreen.storyboard */; };
 		7997A5426ABD4371638E9FE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7997A6F6F63FF47BE684540B /* Assets.xcassets */; };
 		7997A5C95980F56562C78D5F /* UICollectionView+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997AF34E34AA457550E1AA1 /* UICollectionView+Helper.m */; };
 		7997A6CF07565A4AEE54481F /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997A780090855EC9EFEBC88 /* NSDate+Helper.m */; };
+		7997A7A42817E219F17B431A /* CalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997A5F66DB475199800A655 /* CalendarView.m */; };
 		7997A7AAD9281A374288D65A /* HeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997A614FF4E88C065E43347 /* HeaderCell.m */; };
 		7997A836D37E31AD81166AC9 /* CollectionViewTestAppCodeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997A4C4A6CA3D0AF3A2D005 /* CollectionViewTestAppCodeUITests.m */; };
 		7997A9CF6BD082C8106FA248 /* NSDateComponents+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997AB6E060108331745E8CF /* NSDateComponents+Helper.m */; };
@@ -62,11 +64,13 @@
 		7997A297B916FF904A5DE5A7 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		7997A2B50C74FFFD6E37CCC0 /* CollectionViewTestAppCode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionViewTestAppCode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7997A41CE113F49D4316D46E /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		7997A42292F84BE9AFEDC8DB /* CalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarView.h; sourceTree = "<group>"; };
 		7997A499738848648A40056A /* ArrowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrowView.m; sourceTree = "<group>"; };
 		7997A4C4A6CA3D0AF3A2D005 /* CollectionViewTestAppCodeUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionViewTestAppCodeUITests.m; sourceTree = "<group>"; };
 		7997A4E56900B867145C6404 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7997A52DE564642C13DA4AD7 /* DayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DayCell.h; sourceTree = "<group>"; };
 		7997A5B0FD1EE17736527D83 /* UIColor+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Helper.m"; sourceTree = "<group>"; };
+		7997A5F66DB475199800A655 /* CalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarView.m; sourceTree = "<group>"; };
 		7997A614FF4E88C065E43347 /* HeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderCell.m; sourceTree = "<group>"; };
 		7997A630C1C0B8B8A8B44856 /* UIImage+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Helper.h"; sourceTree = "<group>"; };
 		7997A64FA72D96EFBF7D9DB9 /* ArrowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrowView.h; sourceTree = "<group>"; };
@@ -78,6 +82,7 @@
 		7997A7C64542762FB2C016F9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7997A7D771666A69BE35E57F /* CollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		7997A85DFE6C70D421F825D2 /* HeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderCell.h; sourceTree = "<group>"; };
+		7997A8E04766F7E7F364802B /* DayCellSelectionStateBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DayCellSelectionStateBackgroundView.h; sourceTree = "<group>"; };
 		7997A905988BC14DCD82ABDA /* CollectionViewTestAppCodeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionViewTestAppCodeTests.m; sourceTree = "<group>"; };
 		7997A97E37DF8BEE97E133BD /* OptionsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsHelper.m; sourceTree = "<group>"; };
 		7997AB55B0A04611EB28A512 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -91,6 +96,7 @@
 		7997AEDE184FA568D3DBEDB6 /* UIImage+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Helper.m"; sourceTree = "<group>"; };
 		7997AF34E34AA457550E1AA1 /* UICollectionView+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+Helper.m"; sourceTree = "<group>"; };
 		7997AF4272D8ACF038AE80B8 /* UICollectionView+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+Helper.h"; sourceTree = "<group>"; };
+		7997AF73AA4048EF0219ED8D /* DayCellSelectionStateBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DayCellSelectionStateBackgroundView.m; sourceTree = "<group>"; };
 		7997AFF47F46B1870D4F0F00 /* CollectionViewTestAppCodeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CollectionViewTestAppCodeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C33245501AC0273B8C9602EF /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		EC435C84BADEBA6CFA70A079 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -171,6 +177,10 @@
 				7997A18B4B0F760EBAC69A09 /* IndicatorView.h */,
 				7997A499738848648A40056A /* ArrowView.m */,
 				7997A64FA72D96EFBF7D9DB9 /* ArrowView.h */,
+				7997A5F66DB475199800A655 /* CalendarView.m */,
+				7997A42292F84BE9AFEDC8DB /* CalendarView.h */,
+				7997AF73AA4048EF0219ED8D /* DayCellSelectionStateBackgroundView.m */,
+				7997A8E04766F7E7F364802B /* DayCellSelectionStateBackgroundView.h */,
 			);
 			path = CollectionViewTestAppCode;
 			sourceTree = "<group>";
@@ -427,6 +437,8 @@
 				5AF0EC48211A01ED3CE6AD8C /* RoundedButton.m in Sources */,
 				7997AB933B808E1BE37A66AF /* IndicatorView.m in Sources */,
 				7997A3797556CF6AC8F3F273 /* ArrowView.m in Sources */,
+				7997A7A42817E219F17B431A /* CalendarView.m in Sources */,
+				7997A2FC5C0D7770674DF4FD /* DayCellSelectionStateBackgroundView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

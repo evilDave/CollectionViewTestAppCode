@@ -3,54 +3,73 @@
 // Copyright (c) 2016 David Clark. All rights reserved.
 //
 
+#import <Masonry/MASConstraintMaker.h>
 #import "DayCell.h"
 #import "CGRectHelper.h"
+#import "UIColor+Helper.h"
+#import "DayCellSelectionStateBackgroundView.h"
+#import <Masonry/View+MASAdditions.h>
 
 @implementation DayCell {
-	UILabel *label;
+	UILabel *_label;
+	NSMutableDictionary *_dayCellSelectionStateTextColors; // TODO: make static and setup?
+	DayCellSelectionStateBackgroundView *_selectionStateBasedBackgroundView;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
 	self = [super initWithFrame:frame];
-	
+
 	if (self) {
-		self.backgroundView = [[UIView alloc] initWithFrame:frame];
-		self.selectedBackgroundView = [[UIView alloc] initWithFrame:frame];
+		_dayCellSelectionStateTextColors = [[NSMutableDictionary alloc] init];
 
-		UIFont *font = [UIFont systemFontOfSize:22];
+		[self setTextColor:[UIColor HCGrayTextColor] forDayCellSelectionState:DayCellSelectionStateNormal];
+		[self setTextColor:[UIColor whiteColor] forDayCellSelectionState:DayCellSelectionStateStart];
+		[self setTextColor:[UIColor HCGrayTextColor] forDayCellSelectionState:DayCellSelectionStateDuring];
+		[self setTextColor:[UIColor whiteColor] forDayCellSelectionState:DayCellSelectionStateEnd];
+		[self setTextColor:[UIColor HCVeryLightGrayTextColor] forDayCellSelectionState:DayCellSelectionStateUnavailable];
+		[self setTextColor:[UIColor clearColor] forDayCellSelectionState:DayCellSelectionStateInvalid];
 
-		label = [[UILabel alloc] initWithFrame:[CGRectHelper frameAtOrigin:frame]];
-
-		[label setFont:font];
-		[label setTextAlignment:NSTextAlignmentCenter];
-
-		[self.contentView addSubview:label];
+		_label = [[UILabel alloc] initWithFrame:[CGRectHelper frameAtOrigin:frame]];
+		[_label setFont:[UIFont fontWithName:@"HelveticaNeue" size:22]];
+		[_label setTextAlignment:NSTextAlignmentCenter];
+		[self.contentView addSubview:_label];
 	}
 
 	return self;
 }
 
 - (void)setText:(NSString *)text {
-	[label setText:text];
+	_text = text;
+	[_label setText:text];
 }
 
-- (void)setBackgroundColor:(UIColor *)backgroundColor {
-	[self.backgroundView setBackgroundColor:backgroundColor];
+- (void)prepareForReuse {
+	[self setText:nil];
+	[self setDayCellSelectionState:DayCellSelectionStateInvalid];
 }
 
-- (void)setSelectedBackgroundColor:(UIColor *)backgroundColor {
-	[self.selectedBackgroundView setBackgroundColor:backgroundColor];
+- (void)setDayCellSelectionState:(enum DayCellSelectionState)state {
+	_dayCellSelectionState = state;
+
+	UIColor *color = _dayCellSelectionStateTextColors[@(state)];
+	[_label setTextColor:color];
+
+	[_selectionStateBasedBackgroundView removeFromSuperview];
+	_selectionStateBasedBackgroundView = nil;
+
+	_selectionStateBasedBackgroundView = [DayCellSelectionStateBackgroundView viewForSelectionState:state];
+
+	if(_selectionStateBasedBackgroundView) {
+		[self insertSubview:_selectionStateBasedBackgroundView atIndex:0];
+		[_selectionStateBasedBackgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
+			make.edges.equalTo(self);
+		}];
+	}
+
 }
 
-// TODO: use prepareForReuse
-- (UICollectionViewCell *)reset {
-	[self setBackgroundColor:nil];
-	[label setText:nil];
-	return self;
-}
-
-- (void)setTextColor:(UIColor *)color {
-	[label setTextColor:color];
+- (void)setTextColor:(UIColor *)color forDayCellSelectionState:(enum DayCellSelectionState)state {
+	_dayCellSelectionStateTextColors[@(state)] = color;
 }
 
 @end

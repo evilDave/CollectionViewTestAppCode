@@ -10,7 +10,7 @@
 	UILabel *monthLabel;
 }
 
-// TODO: redo layout with autolayout, etc.
+// TODO: redo layout with autolayout, etc. MAYBE? WHY? Maybe...
 
 - (instancetype)initWithFrame:(CGRect)frame {
 	self = [super initWithFrame:frame];

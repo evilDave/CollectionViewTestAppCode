@@ -8,13 +8,18 @@
 
 @interface DayCell : UICollectionViewCell
 
-@property(nonatomic, copy) NSString *text;
+typedef NS_ENUM(NSUInteger, DayCellSelectionState) {
+	DayCellSelectionStateNormal,
+	DayCellSelectionStateStart,
+	DayCellSelectionStateDuring,
+	DayCellSelectionStateEnd,
+	DayCellSelectionStateUnavailable,
+	DayCellSelectionStateInvalid
+};
 
-@property(nonatomic, strong) UIColor *backgroundColor;
+@property(nonatomic) NSString *text;
+@property(nonatomic) enum DayCellSelectionState dayCellSelectionState;
 
-@property(nonatomic, strong) UIColor *selectedBackgroundColor;
+- (void)setTextColor:(UIColor *)color forDayCellSelectionState:(enum DayCellSelectionState)state;
 
-- (UICollectionViewCell *)reset;
-
-- (void)setTextColor:(UIColor *)color;
 @end

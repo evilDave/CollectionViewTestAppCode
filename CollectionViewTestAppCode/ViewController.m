@@ -7,12 +7,12 @@
 #import "HeaderCell.h"
 #import "DayCell.h"
 #import "NSDate+Helper.h"
-#import "CollectionViewFlowLayout.h"
 #import "ViewController+MASAdditions.h"
 #import "RoundedButton.h"
 #import "IndicatorView.h"
+#import "CalendarView.h"
+#import "UIColor+Helper.h"
 #import <Masonry/View+MASAdditions.h>
-
 
 const CGFloat controlHeight = 55;
 const CGFloat controlSpacingX = 5;
@@ -32,6 +32,7 @@ const CGFloat controlSpacingX = 5;
 	UILabel *_startButtonText;
 	UILabel *_endButtonText;
 	IndicatorView *_indicatorView;
+	UICollectionView *_calendarView;
 }
 
 // TODO: pass in calendar, test some
@@ -85,18 +86,14 @@ const CGFloat controlSpacingX = 5;
 		make.height.mas_equalTo(controlHeight);
 	}];
 
-	UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0,0,0,0) collectionViewLayout:[[CollectionViewFlowLayout alloc] init]];
-	[collectionView setDelegate:self];
-	[collectionView setDataSource:self];
-	[collectionView registerClass:[DayCell class] forCellWithReuseIdentifier:@"day"]; // possibly need multiple different day cell types
-	[collectionView registerClass:[HeaderCell class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
-	[collectionView setBackgroundColor:[UIColor whiteColor]];
-    [collectionView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.view addSubview:collectionView];
-    [collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_startButton.mas_bottom);
-        make.bottom.equalTo(self.mas_bottomLayoutGuide);
-        make.leading.trailing.equalTo(self.view);
+	_calendarView = [CalendarView calendarView];
+	[_calendarView setDelegate:self];
+	[_calendarView setDataSource:self];
+	[self.view addSubview:_calendarView];
+    [_calendarView mas_makeConstraints:^(MASConstraintMaker *make) {
+	    make.top.equalTo(_startButton.mas_bottom);
+	    make.bottom.equalTo(self.mas_bottomLayoutGuide);
+	    make.leading.trailing.equalTo(self.view);
     }];
 
 	_indicatorView = [IndicatorView indicatorView];
@@ -110,7 +107,7 @@ const CGFloat controlSpacingX = 5;
 
     [self enterStartMode]; // remember to just use the outer function, don't change the states or properties - this indicates that they should be hidden in a different class
 
-	MASAttachKeys(_startButton, _endButton, collectionView, _indicatorView);
+	MASAttachKeys(_startButton, _endButton, _calendarView, _indicatorView);
 }
 
 - (void)enterEndMode {
@@ -165,34 +162,31 @@ const CGFloat controlSpacingX = 5;
 
 	// do we need cells after the last date too? maybe could show greyed out day cell and still be able to select them? probably too messy looking
 	if(indexPath.row < daysBefore)
-		return [cell reset];
+		return cell;
 
 	NSString *text = [NSString stringWithFormat:@"%i", indexPath.row - daysBefore + 1];
 
 	NSDate *cellDate = [sectionStartDate addUnit:NSCalendarUnitDay value:indexPath.row - daysBefore];
 
 	// current selection
-	if([self.startDate onOrBefore:cellDate] && [self.endDate onOrAfter:cellDate]){
+	if(cellDate < minDate || cellDate > maxDate) {
+		[cell setDayCellSelectionState:DayCellSelectionStateUnavailable];
+	}
+	else if([self.startDate onOrBefore:cellDate] && [self.endDate onOrAfter:cellDate]){
 		if([self.startDate isEqualToDate:cellDate]) {
-			[cell setBackgroundColor:[UIColor greenColor]];
+			[cell setDayCellSelectionState:DayCellSelectionStateStart];
 		}
 		else if([self.endDate isEqualToDate:cellDate]) {
-			[cell setBackgroundColor:[UIColor redColor]];
+			[cell setDayCellSelectionState:DayCellSelectionStateEnd];
 		}
 		else {
-			[cell setBackgroundColor:[UIColor blueColor]];
+			[cell setDayCellSelectionState:DayCellSelectionStateDuring];
 		}
 	}
 	else {
-		[cell setBackgroundColor:[UIColor lightGrayColor]];
+		[cell setDayCellSelectionState:DayCellSelectionStateNormal];
 	}
-	if(cellDate < minDate || cellDate > maxDate) {
-		[cell setTextColor:[UIColor lightGrayColor]];
-	}
-	else{
-		[cell setTextColor:[UIColor blackColor]];
-	}
-	[cell setSelectedBackgroundColor:[UIColor yellowColor]];
+
 	[cell setText:text];
 
 	return cell;
@@ -225,7 +219,7 @@ const CGFloat controlSpacingX = 5;
 
 // TODO: this is getting a bit big
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-	// should store this for speed
+	// TODO: should store this for speed
 	NSDate *sectionStartDate = [self getStartDateFor:indexPath.section];
 	int daysBefore = [self daysInWeekBeforeStartForSection:indexPath.section];
 	NSDate *cellDate = [sectionStartDate addUnit:NSCalendarUnitDay value:indexPath.row - daysBefore];

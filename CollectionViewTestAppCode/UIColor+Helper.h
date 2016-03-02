@@ -13,7 +13,9 @@
 + (UIColor *)HCGrayTextColor;
 + (UIColor *)HCDarkGrayTextColor;
 + (UIColor *)HCLightGrayTextColor;
++ (UIColor *)HCVeryLightGrayTextColor;
 
 + (UIColor *)HCGrayColor;
 
++ (UIColor *)HCLightBlueColor;
 @end
