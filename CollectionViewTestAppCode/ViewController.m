@@ -4,13 +4,13 @@
 //
 
 #import "ViewController.h"
-#import "UIColor+Helper.h"
 #import "HeaderCell.h"
 #import "DayCell.h"
 #import "NSDate+Helper.h"
 #import "CollectionViewFlowLayout.h"
 #import "ViewController+MASAdditions.h"
 #import "RoundedButton.h"
+#import "IndicatorView.h"
 #import <Masonry/View+MASAdditions.h>
 
 
@@ -31,6 +31,7 @@ const CGFloat controlSpacingX = 5;
 	NSCache *startDateForSectionCache;
 	UILabel *_startButtonText;
 	UILabel *_endButtonText;
+	IndicatorView *_indicatorView;
 }
 
 // TODO: pass in calendar, test some
@@ -59,8 +60,7 @@ const CGFloat controlSpacingX = 5;
 	self.view.backgroundColor = [UIColor whiteColor];
 
 	[self setupCalendar];
-
-
+	
 	_startButton = [RoundedButton roundedButton];
 	[_startButton setTitle:@"From" forState:UIControlStateNormal];
 	[_startButton setSubtitle:@"testing"];
@@ -83,7 +83,7 @@ const CGFloat controlSpacingX = 5;
 		make.height.mas_equalTo(controlHeight);
 	}];
 
-    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0,0,0,0) collectionViewLayout:[[CollectionViewFlowLayout alloc] init]];
+	UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0,0,0,0) collectionViewLayout:[[CollectionViewFlowLayout alloc] init]];
 	[collectionView setDelegate:self];
 	[collectionView setDataSource:self];
 	[collectionView registerClass:[DayCell class] forCellWithReuseIdentifier:@"day"]; // possibly need multiple different day cell types
@@ -97,6 +97,14 @@ const CGFloat controlSpacingX = 5;
         make.leading.trailing.equalTo(self.view);
     }];
 
+	_indicatorView = [IndicatorView indicatorView];
+	[_indicatorView setLeftControl:_startButton];
+	[_indicatorView setRightControl:_endButton];
+	[self.view addSubview:_indicatorView];
+	[_indicatorView mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.top.equalTo(_startButton.mas_bottom);
+		make.leading.trailing.equalTo(self.view);
+	}];
 
     [self enterStartMode]; // remember to just use the outer function, don't change the states or properties - this indicates that they should be hidden in a different class
 }
