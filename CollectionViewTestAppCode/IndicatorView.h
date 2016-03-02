@@ -7,6 +7,8 @@
 #import <UIKit/UIKit.h>
 #import "RoundedButton.h"
 
+const float IndicatorViewBarHeight = 8; // TODO: move consts
+
 @interface IndicatorView : UIView
 
 + (IndicatorView *)indicatorView;

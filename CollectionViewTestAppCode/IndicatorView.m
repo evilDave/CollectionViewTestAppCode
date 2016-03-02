@@ -19,7 +19,6 @@
 static NSString *const keyPathForSelected = @"selected";
 
 static const float animationDuration = 0.2;
-static const float barHeight = 8;
 static const float arrowHeight = 22;
 
 + (IndicatorView *)indicatorView {
@@ -41,7 +40,7 @@ static const float arrowHeight = 22;
 		[self addSubview:bar];
 		[bar mas_makeConstraints:^(MASConstraintMaker *make) {
 			make.top.leading.trailing.equalTo(self);
-			make.height.mas_equalTo(barHeight);
+			make.height.mas_equalTo(IndicatorViewBarHeight);
 		}];
 
 		_arrow = [ArrowView arrowView];
@@ -68,7 +67,7 @@ static const float arrowHeight = 22;
 }
 
 - (CGSize)intrinsicContentSize {
-	return CGSizeMake(-1, barHeight+arrowHeight);
+	return CGSizeMake(-1, IndicatorViewBarHeight+arrowHeight);
 }
 
 - (void)setLeftControl:(UIControl *)control {

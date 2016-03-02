@@ -14,9 +14,6 @@
 #import "UIColor+Helper.h"
 #import <Masonry/View+MASAdditions.h>
 
-const CGFloat controlHeight = 55;
-const CGFloat controlSpacingX = 5;
-
 @interface ViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @end
 
@@ -91,7 +88,7 @@ const CGFloat controlSpacingX = 5;
 	[_calendarView setDataSource:self];
 	[self.view addSubview:_calendarView];
     [_calendarView mas_makeConstraints:^(MASConstraintMaker *make) {
-	    make.top.equalTo(_startButton.mas_bottom);
+	    make.top.equalTo(_startButton.mas_bottom).offset(IndicatorViewBarHeight);
 	    make.bottom.equalTo(self.mas_bottomLayoutGuide);
 	    make.leading.trailing.equalTo(self.view);
     }];
@@ -147,7 +144,6 @@ const CGFloat controlSpacingX = 5;
 	NSDate *sectionDate = [self getStartDateFor:indexPath.section];
 	NSString *text = [sectionDate symbolForMonth];
 
-    [headerCell setBackgroundColor:[UIColor lightGrayColor]];
     [headerCell setText:text];
 
 	return headerCell;
@@ -208,13 +204,14 @@ const CGFloat controlSpacingX = 5;
 	return 0;
 }
 
+// TODO: how to properly do all this with autolayout?
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
 	CGFloat cellDimension = floor((collectionView.bounds.size.width) / [NSDate daysInWeek]);
 	return CGSizeMake(cellDimension, cellDimension);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-	return CGSizeMake(collectionView.bounds.size.width, 60);
+	return CGSizeMake(collectionView.bounds.size.width, 75);
 }
 
 // TODO: this is getting a bit big

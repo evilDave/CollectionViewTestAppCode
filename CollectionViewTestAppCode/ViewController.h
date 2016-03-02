@@ -6,6 +6,12 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+// TODO: move consts
+
+const CGFloat controlHeight = 55;
+const CGFloat controlSpacingX = 5;
+const CGFloat controlSpacingY = 18;
+
 
 @interface ViewController : UIViewController
 

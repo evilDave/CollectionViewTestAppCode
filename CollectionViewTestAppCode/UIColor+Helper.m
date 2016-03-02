@@ -9,6 +9,7 @@
 
 @implementation UIColor (Helper)
 
+
 + (UIColor *)HCBlueColor {
 	// #00aef0
 	return [UIColor colorWithRed:0.0f/255 green:174.0f/255 blue:240.0f/255 alpha:1.0f];
@@ -23,6 +24,7 @@
 	// #d2effb // TODO: this is NOT the right color
 	return [UIColor colorWithRed:210.0f/255 green:239.0f/255 blue:251.0f/255 alpha:1.0f];
 }
+
 
 + (UIColor *)HCGrayTextColor {
 	// #6e6e6e
@@ -43,6 +45,7 @@
 	// #dbdbdb
 	return [UIColor colorWithRed:219.0f/255 green:219.0f/255 blue:219.0f/255 alpha:1.0f];
 }
+
 
 + (UIColor *)HCGrayColor {
 	// #f4f4f4
