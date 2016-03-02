@@ -21,7 +21,6 @@
 		7997A7AAD9281A374288D65A /* HeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997A614FF4E88C065E43347 /* HeaderCell.m */; };
 		7997A836D37E31AD81166AC9 /* CollectionViewTestAppCodeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997A4C4A6CA3D0AF3A2D005 /* CollectionViewTestAppCodeUITests.m */; };
 		7997A9CF6BD082C8106FA248 /* NSDateComponents+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997AB6E060108331745E8CF /* NSDateComponents+Helper.m */; };
-		7997A9DA2C2F460825782CF8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7997A6615308253D6BFFFF53 /* Info.plist */; };
 		7997AA8AE539740500401216 /* CollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997A7D771666A69BE35E57F /* CollectionViewFlowLayout.m */; };
 		7997AB5D04643D5CD81797E1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997A4E56900B867145C6404 /* AppDelegate.m */; };
 		7997AB933B808E1BE37A66AF /* IndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997A1260C817F2292A0ABFA /* IndicatorView.m */; };
@@ -336,7 +335,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7997A9DA2C2F460825782CF8 /* Info.plist in Resources */,
 				7997A5426ABD4371638E9FE7 /* Assets.xcassets in Resources */,
 				7997A4492340931E0E635B0A /* LaunchScreen.storyboard in Resources */,
 			);

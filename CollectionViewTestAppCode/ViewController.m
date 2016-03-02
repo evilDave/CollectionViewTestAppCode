@@ -59,6 +59,8 @@ const CGFloat controlSpacingX = 5;
 	self.view = [[UIView alloc] init];
 	self.view.backgroundColor = [UIColor whiteColor];
 
+	[self.view setTranslatesAutoresizingMaskIntoConstraints:NO];
+
 	[self setupCalendar];
 	
 	_startButton = [RoundedButton roundedButton];
@@ -79,7 +81,7 @@ const CGFloat controlSpacingX = 5;
 	[self.view addSubview:_endButton];
 	[_endButton mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.top.trailing.equalTo(self.view);
-		make.width.equalTo(self.view).multipliedBy(0.5);
+		make.width.equalTo(self.view).multipliedBy(0.5).offset(-controlSpacingX / 2);
 		make.height.mas_equalTo(controlHeight);
 	}];
 
@@ -107,6 +109,8 @@ const CGFloat controlSpacingX = 5;
 	}];
 
     [self enterStartMode]; // remember to just use the outer function, don't change the states or properties - this indicates that they should be hidden in a different class
+
+	MASAttachKeys(_startButton, _endButton, collectionView, _indicatorView);
 }
 
 - (void)enterEndMode {

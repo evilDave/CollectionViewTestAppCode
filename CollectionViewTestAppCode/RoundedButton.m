@@ -33,8 +33,8 @@ static UIEdgeInsets buttonSubtitleEdgeInsets;
 	    _subtitleColors = [[NSMutableDictionary alloc] init];
 
 	    _subtitleLabel = [[UILabel alloc] init];
-	    [_subtitleLabel setTextAlignment:NSTextAlignmentCenter];
 	    [_subtitleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+	    [_subtitleLabel setTextAlignment:NSTextAlignmentCenter];
 	    [self addSubview:_subtitleLabel];
 	    [_subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
 		    make.leading.trailing.bottom.equalTo(self).insets(buttonSubtitleEdgeInsets);
@@ -42,6 +42,8 @@ static UIEdgeInsets buttonSubtitleEdgeInsets;
 
 	    [self addObserver:self forKeyPath:keyPathForSelected options:NSKeyValueObservingOptionNew context:nil];
 	    [self addObserver:self forKeyPath:keyPathForHighlighted options:NSKeyValueObservingOptionNew context:nil];
+
+	    MASAttachKeys(_subtitleLabel);
     }
 
     return self;

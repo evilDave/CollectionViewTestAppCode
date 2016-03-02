@@ -18,6 +18,7 @@
 
 static NSString *const keyPathForSelected = @"selected";
 
+static const float animationDuration = 0.2;
 static const float barHeight = 8;
 static const float arrowHeight = 22;
 
@@ -50,6 +51,8 @@ static const float arrowHeight = 22;
 			make.height.mas_equalTo(arrowHeight);
 			make.width.mas_equalTo(arrowWidth);
 		}];
+
+		MASAttachKeys(bar, _arrow);
 	}
 
 	return self;
@@ -86,9 +89,13 @@ static const float arrowHeight = 22;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
 	if([change[@"new"] boolValue]){
+		[self layoutIfNeeded];
 		[_arrowCenterXConstraint uninstall];
 		[_arrow mas_makeConstraints:^(MASConstraintMaker *make) {
-			_arrowCenterXConstraint = make.centerX.equalTo(self).multipliedBy([object isEqual:_rightControl] ? 1.5f : 0.5f);
+			_arrowCenterXConstraint = make.centerX.equalTo(self.mas_centerX).multipliedBy([object isEqual:_rightControl] ? 1.5f : 0.5f);
+		}];
+		[UIView animateWithDuration:animationDuration animations:^{
+			[self layoutIfNeeded];
 		}];
 	}
 }
