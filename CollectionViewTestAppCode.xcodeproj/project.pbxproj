@@ -27,7 +27,7 @@
 		7997AB5D04643D5CD81797E1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997A4E56900B867145C6404 /* AppDelegate.m */; };
 		7997AB933B808E1BE37A66AF /* IndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997A1260C817F2292A0ABFA /* IndicatorView.m */; };
 		7997ABA38D1B38E7CC855440 /* DayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997A0974168956893D395CB /* DayCell.m */; };
-		7997ABFA59B018F75C10FBEE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997A41CE113F49D4316D46E /* ViewController.m */; };
+		7997ABFA59B018F75C10FBEE /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997A41CE113F49D4316D46E /* CalendarViewController.m */; };
 		7997ACB17BB5A7EA26D0731E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7997ABCA708B756DE26B24B4 /* Info.plist */; };
 		7997ACF3B4EAAD1ECD94E501 /* OptionsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997A97E37DF8BEE97E133BD /* OptionsHelper.m */; };
 		7997AFD34AC51985E86FB13C /* CollectionViewTestAppCodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997A905988BC14DCD82ABDA /* CollectionViewTestAppCodeTests.m */; };
@@ -61,9 +61,9 @@
 		7997A1260C817F2292A0ABFA /* IndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndicatorView.m; sourceTree = "<group>"; };
 		7997A18B4B0F760EBAC69A09 /* IndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndicatorView.h; sourceTree = "<group>"; };
 		7997A1A82759E8BEE021D0E6 /* CollectionViewTestAppCodeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CollectionViewTestAppCodeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7997A297B916FF904A5DE5A7 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		7997A297B916FF904A5DE5A7 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
 		7997A2B50C74FFFD6E37CCC0 /* CollectionViewTestAppCode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionViewTestAppCode.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7997A41CE113F49D4316D46E /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		7997A41CE113F49D4316D46E /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
 		7997A42292F84BE9AFEDC8DB /* CalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarView.h; sourceTree = "<group>"; };
 		7997A499738848648A40056A /* ArrowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrowView.m; sourceTree = "<group>"; };
 		7997A4C4A6CA3D0AF3A2D005 /* CollectionViewTestAppCodeUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionViewTestAppCodeUITests.m; sourceTree = "<group>"; };
@@ -149,8 +149,8 @@
 				7997A97CB3F2012D2D31B0B6 /* Supporting Files */,
 				7997AB55B0A04611EB28A512 /* AppDelegate.h */,
 				7997A4E56900B867145C6404 /* AppDelegate.m */,
-				7997A41CE113F49D4316D46E /* ViewController.m */,
-				7997A297B916FF904A5DE5A7 /* ViewController.h */,
+				7997A41CE113F49D4316D46E /* CalendarViewController.m */,
+				7997A297B916FF904A5DE5A7 /* CalendarViewController.h */,
 				7997A5B0FD1EE17736527D83 /* UIColor+Helper.m */,
 				7997AB667CCD83F83346C1C4 /* UIColor+Helper.h */,
 				7997A614FF4E88C065E43347 /* HeaderCell.m */,
@@ -423,7 +423,7 @@
 			files = (
 				7997A42BCF0DB81B3B2077C0 /* main.m in Sources */,
 				7997AB5D04643D5CD81797E1 /* AppDelegate.m in Sources */,
-				7997ABFA59B018F75C10FBEE /* ViewController.m in Sources */,
+				7997ABFA59B018F75C10FBEE /* CalendarViewController.m in Sources */,
 				7997A1F8292D37812C07E902 /* UIColor+Helper.m in Sources */,
 				7997A7AAD9281A374288D65A /* HeaderCell.m in Sources */,
 				7997ABA38D1B38E7CC855440 /* DayCell.m in Sources */,

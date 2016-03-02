@@ -3,7 +3,7 @@
 // Copyright (c) 2016 David Clark. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "CalendarViewController.h"
 #import "HeaderCell.h"
 #import "DayCell.h"
 #import "NSDate+Helper.h"
@@ -14,10 +14,10 @@
 #import "UIColor+Helper.h"
 #import <Masonry/View+MASAdditions.h>
 
-@interface ViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface CalendarViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @end
 
-@implementation ViewController {
+@implementation CalendarViewController {
 	NSDate *minDate; // earliest selectable date
 	NSDate *maxDate; // latest selectable date
 	NSDate *firstDate; // first date shown

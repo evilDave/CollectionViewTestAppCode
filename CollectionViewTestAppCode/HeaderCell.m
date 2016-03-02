@@ -8,7 +8,7 @@
 #import "NSDate+Helper.h"
 #import "UIColor+Helper.h"
 #import "View+MASAdditions.h"
-#import "ViewController.h"
+#import "CalendarViewController.h"
 
 @implementation HeaderCell {
 	UILabel *monthLabel;

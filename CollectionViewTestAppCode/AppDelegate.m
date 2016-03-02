@@ -8,7 +8,7 @@
 
 
 #import "AppDelegate.h"
-#import "ViewController.h"
+#import "CalendarViewController.h"
 #import "NSDate+Helper.h"
 
 
@@ -24,7 +24,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     [self setWindow:[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]]];
-    ViewController *viewController = [[ViewController alloc] init];
+    CalendarViewController *viewController = [[CalendarViewController alloc] init];
     [self.window setRootViewController:viewController];
     [self.window makeKeyAndVisible];
 
