@@ -8,14 +8,14 @@
 #import "HeaderCell.h"
 #import "DayCell.h"
 #import "NSDate+Helper.h"
-#import "UIImage+Helper.h"
 #import "CollectionViewFlowLayout.h"
 #import "ViewController+MASAdditions.h"
 #import "RoundedButton.h"
 #import <Masonry/View+MASAdditions.h>
 
 
-const CGFloat controlHeight = 50;
+const CGFloat controlHeight = 55;
+const CGFloat controlSpacingX = 5;
 
 @interface ViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @end
@@ -25,8 +25,8 @@ const CGFloat controlHeight = 50;
 	NSDate *maxDate; // latest selectable date
 	NSDate *firstDate; // first date shown
 	NSDate *lastDate; // last date shown
-	UIButton *_startButton;
-	UIButton *_endButton;
+	RoundedButton *_startButton;
+	RoundedButton *_endButton;
 	NSCache *daysInWeekBeforeStartForSectionCache;
 	NSCache *startDateForSectionCache;
 	UILabel *_startButtonText;
@@ -60,57 +60,27 @@ const CGFloat controlHeight = 50;
 
 	[self setupCalendar];
 
-	UIEdgeInsets buttonTitleEdgeInsets = UIEdgeInsetsMake(-20, 0, 0, 0);
-	UIEdgeInsets buttonTextEdgeInsets = UIEdgeInsetsMake(0, 0, 5, 0);
 
-	_startButton = [[RoundedButton alloc] init];
+	_startButton = [RoundedButton roundedButton];
 	[_startButton setTitle:@"From" forState:UIControlStateNormal];
-	[_startButton setTitleEdgeInsets:buttonTitleEdgeInsets];
+	[_startButton setSubtitle:@"testing"];
 	[_startButton addTarget:self action:@selector(enterStartMode) forControlEvents:UIControlEventTouchUpInside];
-	[_startButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-	[_startButton setTitleColor:[UIColor greenColor] forState:UIControlStateSelected];
-    [_startButton setBackgroundImage:[UIImage imageWithColor:[UIColor HCBlueColor]] forState:UIControlStateSelected];
-	[_startButton setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
-    [_startButton setTranslatesAutoresizingMaskIntoConstraints:NO];
 	[self.view addSubview:_startButton];
 	[_startButton mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.top.leading.equalTo(self.view);
-		make.width.equalTo(self.view).multipliedBy(0.5);
+		make.width.equalTo(self.view).multipliedBy(0.5).offset(-controlSpacingX / 2);
 		make.height.mas_equalTo(controlHeight);
 	}];
-
-	_startButtonText = [[UILabel alloc] init];
-	[_startButtonText setTextAlignment:NSTextAlignmentCenter];
-	[_startButtonText setText:@"testing"];
-	[_startButtonText setTranslatesAutoresizingMaskIntoConstraints:NO];
-	[_startButton addSubview:_startButtonText];
-	[_startButtonText mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.leading.trailing.bottom.equalTo(_startButton).insets(buttonTextEdgeInsets);
-	}];
-
-	_endButton = [[UIButton alloc] init];
+	
+	_endButton = [RoundedButton roundedButton];
 	[_endButton setTitle:@"To" forState:UIControlStateNormal];
-	[_endButton setTitleEdgeInsets:buttonTitleEdgeInsets];
+	[_endButton setSubtitle:@"testing"];
 	[_endButton addTarget:self action:@selector(enterEndMode) forControlEvents:UIControlEventTouchUpInside];
-	[_endButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-	[_endButton setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
-    [_endButton setBackgroundImage:[UIImage imageWithColor:[UIColor HCBlueColor]] forState:UIControlStateSelected];
-    [_endButton setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
-	[_endButton setTranslatesAutoresizingMaskIntoConstraints:NO];
 	[self.view addSubview:_endButton];
 	[_endButton mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.top.trailing.equalTo(self.view);
 		make.width.equalTo(self.view).multipliedBy(0.5);
 		make.height.mas_equalTo(controlHeight);
-	}];
-
-	_endButtonText = [[UILabel alloc] init];
-	[_endButtonText setTextAlignment:NSTextAlignmentCenter];
-	[_endButtonText setText:@"testing"];
-	[_endButtonText setTranslatesAutoresizingMaskIntoConstraints:NO];
-	[_endButton addSubview:_endButtonText];
-	[_endButtonText mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.leading.trailing.bottom.equalTo(_endButton).insets(buttonTextEdgeInsets);
 	}];
 
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0,0,0,0) collectionViewLayout:[[CollectionViewFlowLayout alloc] init]];
@@ -168,7 +138,7 @@ const CGFloat controlHeight = 50;
 	NSDate *sectionDate = [self getStartDateFor:indexPath.section];
 	NSString *text = [sectionDate symbolForMonth];
 
-    [headerCell setBackgroundColor:[[UIColor lightGrayColor] darker:3]];
+    [headerCell setBackgroundColor:[UIColor lightGrayColor]];
     [headerCell setText:text];
 
 	return headerCell;
@@ -202,10 +172,10 @@ const CGFloat controlHeight = 50;
 		}
 	}
 	else {
-		[cell setBackgroundColor:[[UIColor lightGrayColor] darker]];
+		[cell setBackgroundColor:[UIColor lightGrayColor]];
 	}
 	if(cellDate < minDate || cellDate > maxDate) {
-		[cell setTextColor:[[UIColor lightGrayColor] darker:3]];
+		[cell setTextColor:[UIColor lightGrayColor]];
 	}
 	else{
 		[cell setTextColor:[UIColor blackColor]];

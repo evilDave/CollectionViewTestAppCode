@@ -6,9 +6,14 @@
 #import <Foundation/Foundation.h>
 
 @interface UIColor (Helper)
-- (UIColor *)darker;
 
 + (UIColor *)HCBlueColor;
++ (UIColor *)HCDarkBlueColor;
 
-- (UIColor *)darker:(int)factor;
++ (UIColor *)HCGrayTextColor;
++ (UIColor *)HCDarkGrayTextColor;
++ (UIColor *)HCLightGrayTextColor;
+
++ (UIColor *)HCGrayColor;
+
 @end

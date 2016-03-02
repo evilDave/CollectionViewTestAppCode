@@ -7,4 +7,11 @@
 #import <UIKit/UIKit.h>
 
 @interface RoundedButton : UIButton
+
++ (RoundedButton *)roundedButton;
+
+@property(nonatomic, copy) NSString *subtitle;
+
+- (void)setSubtitleColor:(UIColor *)color forState:(enum UIControlState)state;
+
 @end

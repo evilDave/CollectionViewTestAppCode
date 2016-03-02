@@ -9,25 +9,34 @@
 
 @implementation UIColor (Helper)
 
-- (UIColor *)darker {
-	return [self darker:1];
-}
-
 + (UIColor *)HCBlueColor {
-	return [UIColor colorWithRed:33.0f/255 green:177.0f/255 blue:236.0f/255 alpha:1.0f];
+	// #00aef0
+	return [UIColor colorWithRed:0.0f/255 green:174.0f/255 blue:240.0f/255 alpha:1.0f];
 }
 
-- (UIColor *)darker:(int)factor {
-	CGFloat hue = 0;
-	CGFloat saturation = 0;
-	CGFloat brightness = 0;
-	CGFloat alpha = 0;
-	[self getHue:&hue saturation:&saturation brightness:&brightness alpha:&alpha];
++ (UIColor *)HCDarkBlueColor {
+	// #008cc0
+	return [UIColor colorWithRed:0.0f/255 green:140.0f/255 blue:192.0f/255 alpha:1.0f];
+}
 
-	brightness *= pow(0.9, factor); // this is a bit silly
++ (UIColor *)HCGrayTextColor {
+	// #6e6e6e
+	return [UIColor colorWithRed:110.0f/255 green:110.0f/255 blue:110.0f/255 alpha:1.0f];
+}
 
-	UIColor *darkerColor = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:alpha];
-	return darkerColor;
++ (UIColor *)HCDarkGrayTextColor {
+	// #4e4e4e
+	return [UIColor colorWithRed:78.0f/255 green:78.0f/255 blue:78.0f/255 alpha:1.0f];
+}
+
++ (UIColor *)HCLightGrayTextColor {
+	// #969696
+	return [UIColor colorWithRed:150.0f/255 green:150.0f/255 blue:150.0f/255 alpha:1.0f];
+}
+
++ (UIColor *)HCGrayColor {
+	// #f4f4f4
+	return [UIColor colorWithRed:244.0f/255 green:244.0f/255 blue:244.0f/255 alpha:1.0f];
 }
 
 @end
